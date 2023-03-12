@@ -17,6 +17,9 @@ module DesignCodes
         def call(params = {})
           schema_klass.validate!(params)
           sanitized_params = schema_klass.structurize(params)
+          sanitized_params.members.each do |param_name|
+            define_method(param_name) { sanitized_params[param_name] }
+          end
 
           obj = new(sanitized_params)
           obj.call
