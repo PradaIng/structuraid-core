@@ -70,9 +70,9 @@ module Elements
       def length
         vector = length_vector
 
-        vector.value_x = 0 if @distribution_direction == :length_1
-        vector.value_y = 0 if @distribution_direction == :length_2
-        vector.value_z = 0 if @distribution_direction == :length_3
+        vector.value_i = 0 if @distribution_direction == :length_1
+        vector.value_j = 0 if @distribution_direction == :length_2
+        vector.value_k = 0 if @distribution_direction == :length_3
 
         vector.magnitude
       end
@@ -81,9 +81,9 @@ module Elements
 
       def length_vector
         Engineering::Vector.new(
-          value_x: @end_location.value_1 - @start_location.value_1,
-          value_y: @end_location.value_2 - @start_location.value_2,
-          value_z: @end_location.value_3 - @start_location.value_3
+          value_i: @end_location.value_1 - @start_location.value_1,
+          value_j: @end_location.value_2 - @start_location.value_2,
+          value_k: @end_location.value_3 - @start_location.value_3
         )
       end
     end
