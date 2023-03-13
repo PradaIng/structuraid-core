@@ -1,15 +1,21 @@
 require 'spec_helper'
 require 'elements/reinforcement/straight_longitudinal'
 require 'engineering/locations/relative'
+require 'engineering/locations/absolute'
 require 'elements/reinforcement/rebar'
 require 'materials/steel'
 
 RSpec.describe Elements::Reinforcement::StraightLongitudinal do
   subject(:reinforcement) { described_class.new(distribution_direction: :length_1) }
 
-  let(:start_location) { Engineering::Locations::Relative.new(value_1: -950, value_2: -450, value_3: cover_bottom) }
+  let(:origin) { Engineering::Locations::Absolute.new(value_x: 0, value_y: 0, value_z: 0) }
+  let(:start_location) do
+    Engineering::Locations::Relative.new(value_1: -950, value_2: -450, value_3: cover_bottom, origin:)
+  end
   let(:cover_bottom) { 50 }
-  let(:end_location) { Engineering::Locations::Relative.new(value_1: 950, value_2: 450, value_3: cover_bottom) }
+  let(:end_location) do
+    Engineering::Locations::Relative.new(value_1: 950, value_2: 450, value_3: cover_bottom, origin:)
+  end
   let(:material) { Materials::Steel.new(yield_stress: 4200) }
   let(:first_rebar) do
     Elements::Reinforcement::Rebar.new(

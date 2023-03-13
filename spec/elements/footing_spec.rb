@@ -3,6 +3,7 @@ require 'elements/footing'
 require 'elements/reinforcement/straight_longitudinal'
 require 'materials/concrete'
 require 'engineering/locations/relative'
+require 'engineering/locations/absolute'
 require 'elements/reinforcement/rebar'
 require 'materials/steel'
 
@@ -21,6 +22,7 @@ RSpec.describe Elements::Footing do
     )
   end
 
+  let(:origin) { Engineering::Locations::Absolute.new(value_x: 0, value_y: 0, value_z: 0) }
   let(:length_1) { 1500 }
   let(:length_2) { 1500 }
   let(:height) { 500 }
@@ -48,28 +50,32 @@ RSpec.describe Elements::Footing do
     Engineering::Locations::Relative.new(
       value_1: -0.5 * length_1 + cover_lateral,
       value_2: -0.5 * length_2 + cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
   let(:end_location_1) do
     Engineering::Locations::Relative.new(
       value_1: 0.5 * length_1 - cover_lateral,
       value_2: 0.5 * length_2 - cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
   let(:start_location_2) do
     Engineering::Locations::Relative.new(
       value_1: -0.5 * length_1 + cover_lateral,
       value_2: -0.5 * length_2 + cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
   let(:end_location_2) do
     Engineering::Locations::Relative.new(
       value_1: 0.5 * length_1 - cover_lateral,
       value_2: 0.5 * length_2 - cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
 

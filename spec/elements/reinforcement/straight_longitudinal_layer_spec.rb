@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'elements/reinforcement/straight_longitudinal_layer'
 require 'engineering/locations/relative'
+require 'engineering/locations/absolute'
 require 'elements/reinforcement/rebar'
 require 'materials/steel'
 
@@ -15,8 +16,13 @@ RSpec.describe Elements::Reinforcement::StraightLongitudinalLayer do
     )
   end
 
-  let(:start_location) { Engineering::Locations::Relative.new(value_1: -1 * value_1, value_2: -450, value_3:) }
-  let(:end_location) { Engineering::Locations::Relative.new(value_1:, value_2: 450, value_3:) }
+  let(:origin) { Engineering::Locations::Absolute.new(value_x: 0, value_y: 0, value_z: 0) }
+  let(:start_location) do
+    Engineering::Locations::Relative.new(value_1: -1 * value_1, value_2: -450, value_3:, origin:)
+  end
+  let(:end_location) do
+    Engineering::Locations::Relative.new(value_1:, value_2: 450, value_3:, origin:)
+  end
   let(:value_1) { 950 }
   let(:value_3) { 50 }
   let(:amount_of_rebars) { 3 }

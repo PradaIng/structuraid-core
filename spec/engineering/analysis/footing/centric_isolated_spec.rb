@@ -6,15 +6,17 @@ require 'materials/steel'
 require 'elements/reinforcement/rebar'
 require 'loads/point_load'
 require 'engineering/locations/relative'
+require 'engineering/locations/absolute'
 require 'errors/engineering/analysis/section_direction_error'
 require 'elements/column/rectangular'
 require 'elements/footing'
-require 'byebug'
 
 RSpec.describe Engineering::Analysis::Footing::CentricIsolated do
   subject(:centric_isolated_footing) do
     described_class.new(footing:, load_from_column:, section_direction:)
   end
+
+  let(:origin) { Engineering::Locations::Absolute.new(value_x: 0, value_y: 0, value_z: 0) }
 
   let(:load_from_column) { Loads::PointLoad.new(value: 1500, location: nil) }
   let(:effective_height) { 250 }
@@ -61,28 +63,32 @@ RSpec.describe Engineering::Analysis::Footing::CentricIsolated do
     Engineering::Locations::Relative.new(
       value_1: -0.5 * length_1 + cover_lateral,
       value_2: -0.5 * length_2 + cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
   let(:end_location_1) do
     Engineering::Locations::Relative.new(
       value_1: 0.5 * length_1 - cover_lateral,
       value_2: 0.5 * length_2 - cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
   let(:start_location_2) do
     Engineering::Locations::Relative.new(
       value_1: -0.5 * length_1 + cover_lateral,
       value_2: -0.5 * length_2 + cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
   let(:end_location_2) do
     Engineering::Locations::Relative.new(
       value_1: 0.5 * length_1 - cover_lateral,
       value_2: 0.5 * length_2 - cover_lateral,
-      value_3: cover_bottom
+      value_3: cover_bottom,
+      origin:
     )
   end
 
